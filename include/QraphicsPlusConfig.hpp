@@ -4,7 +4,7 @@
 
 DECLARE_CONFIG(QraphicsPlusConfig,
     CONFIG_VALUE(Resolution, float, "Resolution", 1.0f);
-    CONFIG_VALUE(RefreshRate, int, "Refresh Rate", 0);
+    CONFIG_VALUE(RefreshRate, int, "Refresh Rate", 1);
     CONFIG_VALUE(EnhancedFakeGlow, bool, "Enhanced Fake Glow", true, "Removes Fake Glow from *small* walls, recommended for ME/NE maps.");
     CONFIG_VALUE(BurnMarks, bool, "Burn Marks", true);
     CONFIG_VALUE(Smoke, bool, "Smoke", false);

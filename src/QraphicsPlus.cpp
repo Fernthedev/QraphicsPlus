@@ -2,6 +2,7 @@
 #include "QraphicsPlusConfig.hpp"
 #include "hooks/MainFlowCoordinator.hpp"
 #include "hooks/MainSystemInit.hpp"
+#include "hooks/OVRPlugin.hpp"
 
 #include "GlobalNamespace/OVRPlugin.hpp"
 
@@ -12,7 +13,7 @@ using namespace UnityEngine;
 DEFINE_TYPE(QraphicsPlus::QraphicsPlusViewController);
 
 // This isn't really ideal, but it works. So, whatever...
-std::vector<std::string> refreshRates = {"72 Hz", "80 Hz (Quest 2)", "90 Hz (Quest 2)", "120 Hz (Quest 2)"};
+std::vector<std::string> refreshRates = {"60 Hz", "72 Hz", "80 Hz", "90 Hz", "120 Hz"};
 
 void QraphicsPlus::Install() {
     custom_types::Register::RegisterTypes<
@@ -39,12 +40,14 @@ void QraphicsPlus::QraphicsPlusViewController::DidActivate(
         GameObject* container = BeatSaberUI::CreateScrollableSettingsContainer(get_transform());
 
         AddConfigValueIncrementFloat(container->get_transform(), getQraphicsPlusConfig().Resolution, 1, 0.1f, 0.5f, 1.5f);
-        BeatSaberUI::CreateDropdown(container->get_transform(), "Refresh Rate", refreshRates[getQraphicsPlusConfig().RefreshRate.GetValue()], refreshRates,
-            [](std::string value) {
-                getQraphicsPlusConfig().RefreshRate.SetValue(std::distance(refreshRates.begin(), std::find(refreshRates.begin(), refreshRates.end(), value)));
-
-                OVRPlugin::set_systemDisplayFrequency(0); // Force OVRPlugin to read our refresh-rate, so it changes whilest we're in settings.
-            });
+        if (isQuest2) {
+            BeatSaberUI::CreateDropdown(container->get_transform(), "Refresh Rate", refreshRates[getQraphicsPlusConfig().RefreshRate.GetValue()], refreshRates,
+                [](std::string value) {
+                    getQraphicsPlusConfig().RefreshRate.SetValue(std::distance(refreshRates.begin(), std::find(refreshRates.begin(), refreshRates.end(), value)));
+                    
+                    OVRPlugin::set_systemDisplayFrequency(0); // Force OVRPlugin to read our refresh-rate, so it changes whilest we're in settings.
+                });
+        }
         AddConfigValueToggle(container->get_transform(), getQraphicsPlusConfig().EnhancedFakeGlow);
         AddConfigValueToggle(container->get_transform(), getQraphicsPlusConfig().BurnMarks);
         AddConfigValueToggle(container->get_transform(), getQraphicsPlusConfig().Smoke);

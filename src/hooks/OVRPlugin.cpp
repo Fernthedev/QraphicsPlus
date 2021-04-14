@@ -1,5 +1,6 @@
 #include "QraphicsPlus.hpp"
 #include "QraphicsPlusConfig.hpp"
+#include "hooks/OVRPlugin.hpp"
 
 #include "GlobalNamespace/OVRPlugin.hpp"
 
@@ -11,16 +12,21 @@ MAKE_HOOK_OFFSETLESS(
     OVRPlugin* self,
     float value
 ) {
-    float systemDisplayFrequency = 72.0f;
+    isQuest2 = value == 90.0f;
+
+    float systemDisplayFrequency = 60.0f;
 
     switch (getQraphicsPlusConfig().RefreshRate.GetValue()) {
     case 1:
-        systemDisplayFrequency = 80.0f;
+        systemDisplayFrequency = 72.0f;
         break;
     case 2:
-        systemDisplayFrequency = 90.0f;
+        systemDisplayFrequency = 80.0f;
         break;
     case 3:
+        systemDisplayFrequency = 90.0f;
+        break;
+    case 4:
         systemDisplayFrequency = 120.0f;
         break;
     }
