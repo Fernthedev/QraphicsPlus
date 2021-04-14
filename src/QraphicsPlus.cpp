@@ -45,9 +45,14 @@ void QraphicsPlus::QraphicsPlusViewController::DidActivate(
                 [](std::string value) {
                     getQraphicsPlusConfig().RefreshRate.SetValue(std::distance(refreshRates.begin(), std::find(refreshRates.begin(), refreshRates.end(), value)));
                     
-                    OVRPlugin::set_systemDisplayFrequency(0); // Force OVRPlugin to read our refresh-rate, so it changes whilest we're in settings.
+                    // Force OVRPlugin to read our config.
+                    OVRPlugin::set_systemDisplayFrequency(0);
+                    OVRPlugin::set_cpuLevel(0);
+                    OVRPlugin::set_gpuLevel(0);
                 });
         }
+        AddConfigValueIncrementInt(container->get_transform(), getQraphicsPlusConfig().CpuLevel, 1, 0, 2);
+        AddConfigValueIncrementInt(container->get_transform(), getQraphicsPlusConfig().GpuLevel, 1, 0, 2);
         AddConfigValueToggle(container->get_transform(), getQraphicsPlusConfig().EnhancedFakeGlow);
         AddConfigValueToggle(container->get_transform(), getQraphicsPlusConfig().BurnMarks);
         AddConfigValueToggle(container->get_transform(), getQraphicsPlusConfig().Smoke);

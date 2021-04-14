@@ -4,6 +4,7 @@
 #include "GlobalNamespace/BoolSO.hpp"
 #include "GlobalNamespace/FloatSO.hpp"
 #include "GlobalNamespace/MainSettingsModelSO.hpp"
+#include "GlobalNamespace/OVRPlugin.hpp"
 
 using namespace GlobalNamespace;
 
@@ -14,6 +15,11 @@ MAKE_HOOK_OFFSETLESS(
     bool forced
 ) {
     MainSettingsModelSO_Load(self, forced);
+
+    // Force OVRPlugin to read our config.
+    OVRPlugin::set_systemDisplayFrequency(0);
+    OVRPlugin::set_cpuLevel(0);
+    OVRPlugin::set_gpuLevel(0);
     
     self->vrResolutionScale->set_value(getQraphicsPlusConfig().Resolution.GetValue());
     self->burnMarkTrailsEnabled->set_value(getQraphicsPlusConfig().BurnMarks.GetValue());

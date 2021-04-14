@@ -3,6 +3,7 @@
 #include "hooks/MainSystemInit.hpp"
 
 #include "GlobalNamespace/MainSystemInit.hpp"
+#include "GlobalNamespace/OVRPlugin.hpp"
 
 using namespace GlobalNamespace;
 

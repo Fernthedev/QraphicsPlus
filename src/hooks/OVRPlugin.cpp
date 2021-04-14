@@ -34,6 +34,26 @@ MAKE_HOOK_OFFSETLESS(
     OVRPlugin_set_systemDisplayFrequency(self, systemDisplayFrequency);
 }
 
+MAKE_HOOK_OFFSETLESS(
+    OVRPlugin_set_cpuLevel,
+    void,
+    OVRPlugin* self,
+    int value
+) {
+    OVRPlugin_set_cpuLevel(self, getQraphicsPlusConfig().CpuLevel.GetValue());
+}
+
+MAKE_HOOK_OFFSETLESS(
+    OVRPlugin_set_gpuLevel,
+    void,
+    OVRPlugin* self,
+    int value
+) {
+    OVRPlugin_set_gpuLevel(self, getQraphicsPlusConfig().GpuLevel.GetValue());
+}
+
 void QraphicsPlus::Hooks::OVRPlugin() {
     INSTALL_HOOK_OFFSETLESS(getLogger(), OVRPlugin_set_systemDisplayFrequency, il2cpp_utils::FindMethodUnsafe("", "OVRPlugin", "set_systemDisplayFrequency", 1));
+    INSTALL_HOOK_OFFSETLESS(getLogger(), OVRPlugin_set_cpuLevel, il2cpp_utils::FindMethodUnsafe("", "OVRPlugin", "set_cpuLevel", 1));
+    INSTALL_HOOK_OFFSETLESS(getLogger(), OVRPlugin_set_gpuLevel, il2cpp_utils::FindMethodUnsafe("", "OVRPlugin", "set_gpuLevel", 1));
 }
