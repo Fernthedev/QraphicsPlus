@@ -11,6 +11,7 @@ using namespace UnityEngine;
 
 DEFINE_TYPE(QraphicsPlus::QraphicsPlusViewController);
 
+// This isn't really ideal, but it works. So, whatever...
 std::vector<std::string> refreshRates = {"72 Hz", "80 Hz (Quest 2)", "90 Hz (Quest 2)", "120 Hz (Quest 2)"};
 
 void QraphicsPlus::Install() {
@@ -38,7 +39,7 @@ void QraphicsPlus::QraphicsPlusViewController::DidActivate(bool firstActivation,
             [](std::string value) {
                 getQraphicsPlusConfig().RefreshRate.SetValue(std::distance(refreshRates.begin(), std::find(refreshRates.begin(), refreshRates.end(), value)));
 
-                OVRPlugin::set_systemDisplayFrequency(0);
+                OVRPlugin::set_systemDisplayFrequency(0); // Force OVRPlugin to read our refresh-rate, so it changes whilest we're in settings.
             });
         AddConfigValueToggle(container->get_transform(), getQraphicsPlusConfig().EnhancedFakeGlow);
         AddConfigValueToggle(container->get_transform(), getQraphicsPlusConfig().BurnMarks);
