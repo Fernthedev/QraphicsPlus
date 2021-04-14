@@ -30,7 +30,11 @@ void QraphicsPlus::Install() {
     Hooks::ParametricBoxFakeGlowController();
 }
 
-void QraphicsPlus::QraphicsPlusViewController::DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling) {
+void QraphicsPlus::QraphicsPlusViewController::DidActivate(
+    bool firstActivation,
+    bool addedToHierarchy,
+    bool screenSystemEnabling
+) {
     if (firstActivation) {
         GameObject* container = BeatSaberUI::CreateScrollableSettingsContainer(get_transform());
 
@@ -48,7 +52,10 @@ void QraphicsPlus::QraphicsPlusViewController::DidActivate(bool firstActivation,
     }
 }
 
-void QraphicsPlus::QraphicsPlusViewController::DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling) {
+void QraphicsPlus::QraphicsPlusViewController::DidDeactivate(
+    bool removedFromHierarchy,
+    bool screenSystemDisabling
+) {
     if (mainSettingsModel && menuTransitionsHelper) {
         mainSettingsModel->Load(true);
         menuTransitionsHelper->RestartGame(nullptr);
