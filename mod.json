@@ -1,0 +1,16 @@
+{
+    "_QPVersion": "0.1.1",
+    "name": "Qraphics+",
+    "id": "qraphicsplus",
+    "author": "nyamimi~",
+    "version": "0.1.0",
+    "packageId": "com.beatgames.beatsaber",
+    "packageVersion": "1.14.0",
+    "description": "Enhance your Beat Saber Quest experience!",
+    "modFiles": [
+        "libqraphicsplus.so"
+    ],
+    "libraryFiles": [
+        "libbeatsaber-hook_1_2_4.so"
+    ]
+}
