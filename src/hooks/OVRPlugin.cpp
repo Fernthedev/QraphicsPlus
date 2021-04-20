@@ -5,14 +5,15 @@
 #include "GlobalNamespace/OVRPlugin.hpp"
 
 #include "conditional-dependencies/shared/main.hpp"
+#include "qraphics_api.hpp"
 
 using namespace GlobalNamespace;
 
-std::optional<int> refreshRateAPI;
+std::optional<float> refreshRateAPI;
 std::optional<int> cpuLevelAPI;
 std::optional<int> gpuLevelAPI;
 
-EXPOSE_API(setRefreshRate, void, std::optional<int> refreshRate) {
+EXPOSE_API(setRefreshRate, void, std::optional<float> refreshRate) {
     refreshRateAPI = refreshRate;
 }
 
