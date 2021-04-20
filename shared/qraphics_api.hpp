@@ -11,7 +11,7 @@ namespace Qraphics {
     class QraphicsAPI {
 
         /// Sets the refresh rate of the screen
-        /// If null-opt, it will be set to the Qraphics+ configuration
+        /// If null-opt, it will be set to the Qraphics+ configuration or the initial value
         static void setRefreshRate(std::optional<float> refreshRate) noexcept {
             auto function = CondDep::Find<void, std::optional<float>>("qraphicsplus", "setRefreshRate");
 
@@ -32,7 +32,7 @@ namespace Qraphics {
         }
 
         /// Sets the CPU level
-        /// If null-opt, it will be set to the Qraphics+ configuration
+        /// If null-opt, it will be set to the Qraphics+ configuration or the initial value
         static void setCPULevel(std::optional<int> cpuLevel) noexcept {
             auto function = CondDep::Find<void, std::optional<int>>("qraphicsplus", "setCPULevel");
 
@@ -51,7 +51,7 @@ namespace Qraphics {
         }
 
         /// Sets the GPU level
-        /// If null-opt, it will be set to the Qraphics+ configuration
+        /// If null-opt, it will be set to the Qraphics+ configuration or the initial value
         static void setGPULevel(std::optional<int> gpuLevel) noexcept {
             auto function = CondDep::Find<void, std::optional<int>>("qraphicsplus", "setGPULevel");
 
