@@ -1,3 +1,3 @@
 #pragma once
 
-inline bool isQuest2;
+inline std::optional<bool> isQuest2;

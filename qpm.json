@@ -6,7 +6,9 @@
     "id": "qraphicsplus",
     "version": "0.1.0",
     "url": null,
-    "additionalData": {}
+    "additionalData": {
+      "headersOnly": true
+    }
   },
   "dependencies": [
     {
@@ -35,6 +37,11 @@
     },
     {
       "id": "config-utils",
+      "versionRange": "*",
+      "additionalData": {}
+    },
+    {
+      "id": "conditional-dependencies",
       "versionRange": "*",
       "additionalData": {}
     }

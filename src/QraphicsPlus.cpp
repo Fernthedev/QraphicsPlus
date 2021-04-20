@@ -42,7 +42,7 @@ void QraphicsPlus::QraphicsPlusViewController::DidActivate(
         AddConfigValueIncrementFloat(container->get_transform(), getQraphicsPlusConfig().Resolution, 1, 0.1f, 0.5f, 1.5f);
         if (isQuest2) {
             BeatSaberUI::CreateDropdown(container->get_transform(), "Refresh Rate", refreshRates[getQraphicsPlusConfig().RefreshRate.GetValue()], refreshRates,
-                [](std::string value) {
+                [](const std::string& value) {
                     getQraphicsPlusConfig().RefreshRate.SetValue(std::distance(refreshRates.begin(), std::find(refreshRates.begin(), refreshRates.end(), value)));
                     
                     // Force OVRPlugin to read our config.
