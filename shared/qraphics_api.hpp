@@ -9,6 +9,7 @@
 
 namespace Qraphics {
     class QraphicsAPI {
+        public:
 
         /// Sets the refresh rate of the screen
         /// If null-opt, it will be set to the Qraphics+ configuration or the initial value
