@@ -5,8 +5,10 @@
     "name": "Qraphics+",
     "id": "qraphicsplus",
     "version": "0.1.0",
-    "url": null,
-    "additionalData": {}
+    "url": "https://github.com/nyamimi/QraphicsPlus/",
+    "additionalData": {
+      "headersOnly": true
+    }
   },
   "dependencies": [
     {
@@ -35,6 +37,11 @@
     },
     {
       "id": "config-utils",
+      "versionRange": "*",
+      "additionalData": {}
+    },
+    {
+      "id": "conditional-dependencies",
       "versionRange": "*",
       "additionalData": {}
     }

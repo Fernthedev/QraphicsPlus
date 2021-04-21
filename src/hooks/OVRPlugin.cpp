@@ -4,7 +4,26 @@
 
 #include "GlobalNamespace/OVRPlugin.hpp"
 
+#include "conditional-dependencies/shared/main.hpp"
+#include "qraphics_api.hpp"
+
 using namespace GlobalNamespace;
+
+std::optional<float> refreshRateAPI;
+std::optional<int> cpuLevelAPI;
+std::optional<int> gpuLevelAPI;
+
+EXPOSE_API(setRefreshRate, void, std::optional<float> refreshRate) {
+    refreshRateAPI = refreshRate;
+}
+
+EXPOSE_API(setGPULevel, void, std::optional<int> gpuLevel) {
+    gpuLevelAPI = gpuLevel;
+}
+
+EXPOSE_API(setCPULevel, void, std::optional<int> cpuLevel) {
+    cpuLevelAPI = cpuLevel;
+}
 
 MAKE_HOOK_OFFSETLESS(
     OVRPlugin_set_systemDisplayFrequency,
@@ -12,7 +31,8 @@ MAKE_HOOK_OFFSETLESS(
     OVRPlugin* self,
     float value
 ) {
-    isQuest2 = value == 90.0f;
+    if (isQuest2 == std::nullopt)
+        isQuest2 = std::make_optional(value == 90.0f);
 
     float systemDisplayFrequency = 60.0f;
 
@@ -31,6 +51,9 @@ MAKE_HOOK_OFFSETLESS(
         break;
     }
 
+    if (refreshRateAPI)
+        systemDisplayFrequency = refreshRateAPI.value();
+
     OVRPlugin_set_systemDisplayFrequency(self, systemDisplayFrequency);
 }
 
@@ -40,7 +63,12 @@ MAKE_HOOK_OFFSETLESS(
     OVRPlugin* self,
     int value
 ) {
-    OVRPlugin_set_cpuLevel(self, getQraphicsPlusConfig().CpuLevel.GetValue());
+    int level = getQraphicsPlusConfig().CpuLevel.GetValue();
+
+    if (cpuLevelAPI)
+        level = cpuLevelAPI.value();
+
+    OVRPlugin_set_cpuLevel(self, level);
 }
 
 MAKE_HOOK_OFFSETLESS(
@@ -49,7 +77,12 @@ MAKE_HOOK_OFFSETLESS(
     OVRPlugin* self,
     int value
 ) {
-    OVRPlugin_set_gpuLevel(self, getQraphicsPlusConfig().GpuLevel.GetValue());
+    int level = getQraphicsPlusConfig().GpuLevel.GetValue();
+
+    if (gpuLevelAPI)
+        level = gpuLevelAPI.value();
+
+    OVRPlugin_set_gpuLevel(self, level);
 }
 
 void QraphicsPlus::Hooks::OVRPlugin() {
